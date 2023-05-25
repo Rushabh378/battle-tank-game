@@ -8,6 +8,7 @@ namespace TankBattle
     {
         [SerializeField][Range(0, 100)] private float speed = 10;
         private Vector3 movement;
+        [SerializeField]private int rotationSpeed = 800;
         [SerializeField] private FixedJoystick joystick;
 
         private void FixedUpdate()
@@ -15,11 +16,15 @@ namespace TankBattle
             //movement
             
             movement = new(joystick.Horizontal, 0f, joystick.Vertical);
-            transform.Translate(movement.normalized * Time.deltaTime * speed);
+            movement.Normalize();
+            transform.Translate(movement * Time.deltaTime * speed, Space.World);
 
             // movement rotetion
-            //float movementAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg;
-            //transform.rotation = Quaternion.Euler(new Vector3(0f, movementAngle, 0f));
+            if(movement != Vector3.zero)
+            {
+                Quaternion toRotation = Quaternion.LookRotation(movement, Vector3.up);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
+            }
         }
     }
 }
