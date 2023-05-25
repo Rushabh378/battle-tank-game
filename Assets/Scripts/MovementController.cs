@@ -8,14 +8,14 @@ namespace TankBattle
     {
         [SerializeField][Range(0, 100)] private float speed = 10;
         private Vector3 movement;
-        [SerializeField]private int rotationSpeed = 800;
-        [SerializeField] private FixedJoystick joystick;
+        [SerializeField] private int rotationSpeed = 800;
+        //[SerializeField] private FixedJoystick joystick;
 
         private void FixedUpdate()
         {
             //movement
             
-            movement = new(joystick.Horizontal, 0f, joystick.Vertical);
+            movement = new(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
             movement.Normalize();
             transform.Translate(movement * Time.deltaTime * speed, Space.World);
 

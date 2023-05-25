@@ -1,21 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace TankBattle
+namespace TankBattle.MVC
 {
     public class TankView : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private TankController tankController;
+
+        public TankView()
         {
-        
+            
         }
 
-        // Update is called once per frame
-        void Update()
+        public void setTankController(TankController tankController)
         {
-        
+            this.tankController = tankController;
         }
     }
 }
