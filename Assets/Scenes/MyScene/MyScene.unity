@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tankView: {fileID: 6513512786874618839, guid: 85e74817a3e78974cad3d1f1df28eabc,
     type: 3}
+  tankArray: {fileID: 11400000, guid: 22ff1a63ccf1dd44ba3c7aa0adfa9302, type: 2}
 --- !u!4 &529138052
 Transform:
   m_ObjectHideFlags: 0
