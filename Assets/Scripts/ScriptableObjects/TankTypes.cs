@@ -9,6 +9,7 @@ namespace TankBattle.ScriptableObjects
         public Color color;
         public int health = 100;
         public int damage = 20;
-        public int movementSpeed = 12;
+        public float movementSpeed = 17;
+        public float rotationSpeed = 150;
     }
 }

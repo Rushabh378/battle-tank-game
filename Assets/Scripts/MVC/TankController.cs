@@ -6,19 +6,37 @@ namespace TankBattle.MVC
     {
         private TankModel tankModel;
         private TankView tankView;
+        private Rigidbody rigidBody;
+        
+        //Private-   _variableName
+        //Serializefield/arguments-   variableName
+        //public-  VariableName
+        //constants  VARIABLE_NAME
+                            
 
-        public TankController(TankModel tankModel,TankView tankView)
+
+        public TankController(TankModel tankModel,TankView tankView, Vector3 position)
         {
             this.tankModel = tankModel;
-            this.tankView = tankView;
+            //tankView.gameObject.GetComponentsInChildren<Material>();
+            this.tankView = GameObject.Instantiate<TankView>(tankView, position, Quaternion.identity);
 
             this.tankModel.setTankController(this);
             this.tankView.setTankController(this);
+
+            rigidBody = this.tankView.gameObject.GetComponent<Rigidbody>();
         }
 
-        public void SpawnTank(Vector3 position)
+        public void MoveTank(float movement)
         {
-            GameObject.Instantiate(tankView.gameObject, position, Quaternion.identity);
+            rigidBody.AddForce(tankView.transform.forward * movement * tankModel.MovementSpeed,ForceMode.Acceleration);
+        }
+        public void RotateTank(float rotation)
+        {
+            Vector3 yRotation = new(0f, rotation * tankModel.RotationSpeed, 0f);
+            Quaternion deltaRotation = Quaternion.Euler(yRotation * Time.deltaTime);
+            rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
+            
         }
     }
 }

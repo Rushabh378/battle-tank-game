@@ -92,20 +92,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8625216, y: 2.0618746, z: 2.103953}
   m_Center: {x: 0.017750502, y: 0.8124553, z: -0.012743056}
---- !u!114 &2144216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2114725227903808590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b067cf84f42c4a4b87b13b80a98def0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 12
-  rotationSpeed: 1000
 --- !u!114 &6513512786874618839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118,4 +104,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c507dee73f1da374e8cff3326d2984bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankType: {fileID: 11400000, guid: 56fb3d967611f3649be5bb3d13a1e7e8, type: 2}

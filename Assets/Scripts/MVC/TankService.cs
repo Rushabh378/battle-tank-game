@@ -1,21 +1,21 @@
 using UnityEngine;
-using TankBattle.MVC;
 using TankBattle.ScriptableObjects;
+using TankBattle.Singleton;
 
-namespace TankBattle.Singleton
+namespace TankBattle.MVC
 {
     public class TankService : GenericSingleton<TankService>
     {
         [SerializeField] private TankView tankView;
-        public TankTypeArray tankArray;
+        [SerializeField] private TankTypes tankType;
         private TankModel tankModel;
         private TankController tankController;
 
         private void Start()
         {
-            tankModel = new TankModel(tankArray.tankTypes[(int)AvailableTank.playerTankGreen]);
-            tankController = new TankController(tankModel, tankView);
-            tankController.SpawnTank(transform.position);
+            tankModel = new TankModel(tankType);
+            tankController = new TankController(tankModel, tankView, transform.position);
+        
         }
     }
 }
