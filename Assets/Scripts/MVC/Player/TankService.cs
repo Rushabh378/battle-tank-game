@@ -2,7 +2,7 @@ using UnityEngine;
 using TankBattle.ScriptableObjects;
 using TankBattle.Singleton;
 
-namespace TankBattle.MVC
+namespace TankBattle.MVC.Player
 {
     public class TankService : GenericSingleton<TankService>
     {

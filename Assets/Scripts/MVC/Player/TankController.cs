@@ -1,12 +1,15 @@
+using System;
 using UnityEngine;
 
-namespace TankBattle.MVC
+namespace TankBattle.MVC.Player
 {
     public class TankController
     {
         private TankModel tankModel;
         private TankView tankView;
         private Rigidbody rigidBody;
+
+        private Material[] tankMaterial;
         
         //Private-   _variableName
         //Serializefield/arguments-   variableName
@@ -18,7 +21,6 @@ namespace TankBattle.MVC
         public TankController(TankModel tankModel,TankView tankView, Vector3 position)
         {
             this.tankModel = tankModel;
-            //tankView.gameObject.GetComponentsInChildren<Material>();
             this.tankView = GameObject.Instantiate<TankView>(tankView, position, Quaternion.identity);
 
             this.tankModel.setTankController(this);

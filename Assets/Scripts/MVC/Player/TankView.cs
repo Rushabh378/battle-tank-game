@@ -1,7 +1,6 @@
 using UnityEngine;
-using TankBattle.ScriptableObjects;
 
-namespace TankBattle.MVC
+namespace TankBattle.MVC.Player
 {
     public class TankView : MonoBehaviour
     {
