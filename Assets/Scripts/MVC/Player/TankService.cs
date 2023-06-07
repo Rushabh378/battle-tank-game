@@ -8,13 +8,14 @@ namespace TankBattle.MVC.Player
     {
         [SerializeField] private TankView tankView;
         [SerializeField] private TankTypes tankType;
+        [SerializeField] private GameObject mainCamera;
         private TankModel tankModel;
         private TankController tankController;
 
         private void Start()
         {
             tankModel = new TankModel(tankType);
-            tankController = new TankController(tankModel, tankView, transform.position);
+            tankController = new TankController(tankModel, tankView, transform.position, mainCamera);
         
         }
     }

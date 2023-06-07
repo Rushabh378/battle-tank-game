@@ -10,21 +10,18 @@ namespace TankBattle.MVC.Player
         private Rigidbody rigidBody;
 
         private Material[] tankMaterial;
-        
-        //Private-   _variableName
-        //Serializefield/arguments-   variableName
-        //public-  VariableName
-        //constants  VARIABLE_NAME
                             
 
 
-        public TankController(TankModel tankModel,TankView tankView, Vector3 position)
+        public TankController(TankModel tankModel,TankView tankView, Vector3 position, GameObject camera)
         {
             this.tankModel = tankModel;
             this.tankView = GameObject.Instantiate<TankView>(tankView, position, Quaternion.identity);
 
             this.tankModel.setTankController(this);
             this.tankView.setTankController(this);
+
+            camera.transform.parent = this.tankView.transform;
 
             rigidBody = this.tankView.gameObject.GetComponent<Rigidbody>();
         }

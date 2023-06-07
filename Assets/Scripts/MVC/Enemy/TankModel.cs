@@ -7,10 +7,18 @@ namespace TankBattle.MVC.Enemy
     {
         private TankTypes tankType;
         private TankController tankController;
-        public TankModel(TankTypes tankType)
+        private Transform destination;
+        private float range = 50;
+
+        public TankModel(TankTypes tankType, float range)
         {
             this.tankType = tankType;
+            this.range = range;
         }
+
+        public Transform Destination { get => destination; set => destination = value; }
+        public float patrolingRange => range;
+
         public void setTankController(TankController tankController)
         {
             this.tankController = tankController;
