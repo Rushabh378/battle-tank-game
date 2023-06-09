@@ -29,6 +29,15 @@ namespace TankBattle.MVC.Enemy
             this.tankView.setTankController(this);
         }
 
+        internal void MinusHealth(int damage)
+        {
+            tankModel.Health -= damage;
+            if (tankModel.Health <= 0)
+            {
+                tankView.gameObject.SetActive(false);
+            }
+        }
+
         internal void Patrol()
         {
             tankView.agent.stoppingDistance = 5f;

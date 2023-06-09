@@ -4,6 +4,7 @@ namespace TankBattle.MVC.Player
 {
     public class TankView : MonoBehaviour
     {
+        [SerializeField] internal Transform shootPosition;
         private TankController tankController;
         private float movement;
         private float rotation;
@@ -11,6 +12,14 @@ namespace TankBattle.MVC.Player
         public void setTankController(TankController tankController)
         {
             this.tankController = tankController;
+        }
+
+        public void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                tankController.ShootingBullet(shootPosition.position);
+            }
         }
 
         public void FixedUpdate()

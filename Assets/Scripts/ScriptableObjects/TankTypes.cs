@@ -6,7 +6,7 @@ namespace TankBattle.ScriptableObjects
     public class TankTypes : ScriptableObject
     {
         public int health = 100;
-        public int damage = 20;
+        public Damager bulletPrefab;
         public float movementSpeed = 17;
         public float rotationSpeed = 150;
     }

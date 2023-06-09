@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Player Tank
   m_EditorClassIdentifier: 
   health: 100
-  damage: 20
+  bulletPrefab: {fileID: -1966490491249792187, guid: 52ad8102f4405894cb7cb2a94b4c9a1c,
+    type: 3}
   movementSpeed: 17
   rotationSpeed: 150

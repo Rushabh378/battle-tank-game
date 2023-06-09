@@ -7,15 +7,18 @@ namespace TankBattle.MVC.Player
     {
         private TankController tankController;
         private TankTypes tankType;
+        private float force = 20f;
        
         public TankModel(TankTypes tankType)
         {
             this.tankType = tankType;
         }
-        public int Health => tankType.health;
-        public int Damage => tankType.damage;
+        public int Health { get => tankType.health; set => tankType.health = value; }
+        public GameObject bullet => tankType.bulletPrefab.gameObject;
         public float MovementSpeed => tankType.movementSpeed;
         public float RotationSpeed => tankType.rotationSpeed;
+
+        public float Force => force;
 
         public void setTankController(TankController tankController)
         {

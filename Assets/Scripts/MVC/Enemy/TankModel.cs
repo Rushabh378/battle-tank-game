@@ -19,6 +19,8 @@ namespace TankBattle.MVC.Enemy
         public Transform Destination { get => destination; set => destination = value; }
         public float patrolingRange => range;
 
+        public int Health { get => tankType.health; set => tankType.health = value; }
+
         public void setTankController(TankController tankController)
         {
             this.tankController = tankController;

@@ -4,7 +4,7 @@ using UnityEngine.AI;
 namespace TankBattle.MVC.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyTankView : MonoBehaviour
+    public class EnemyTankView : MonoBehaviour, IDamagable
     {
         private TankController tankController;
         [HideInInspector] public NavMeshAgent agent;
@@ -24,5 +24,9 @@ namespace TankBattle.MVC.Enemy
             this.tankController = tankController;
         }
 
+        public void GetDamage(int damage)
+        {
+            tankController.MinusHealth(damage);
+        }
     }
 }
