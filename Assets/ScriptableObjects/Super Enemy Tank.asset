@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675efd0f0ff087244b6e0f6bddfbbe13, type: 3}
   m_Name: Super Enemy Tank
   m_EditorClassIdentifier: 
-  health: 100
+  health: 120
   bulletPrefab: {fileID: -1966490491249792187, guid: 52ad8102f4405894cb7cb2a94b4c9a1c,
     type: 3}
-  firePower: 20
-  movementSpeed: 17
-  rotationSpeed: 120
+  firePower: 30
+  movementSpeed: 20
+  rotationSpeed: 150
