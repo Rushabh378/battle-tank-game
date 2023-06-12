@@ -16,6 +16,8 @@ namespace TankBattle.MVC.Player
 
         public void Update()
         {
+            getMovements();
+
             if (Input.GetMouseButtonDown(0))
             {
                 tankController.ShootingBullet(shootPosition.position);
@@ -24,7 +26,7 @@ namespace TankBattle.MVC.Player
 
         public void FixedUpdate()
         {
-            getMovements();
+            
             if(movement != 0f)
             {
                 tankController.MoveTank(movement);
