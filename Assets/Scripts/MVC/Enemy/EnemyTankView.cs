@@ -14,14 +14,31 @@ namespace TankBattle.MVC.Enemy
             agent = GetComponent<NavMeshAgent>();
         }
 
-        public void Update()
-        {
-            tankController.Patrol();
-        }
-
         public void setTankController(TankController tankController)
         {
             this.tankController = tankController;
+        }
+
+        public void Update()
+        {
+            //tankController.Patrol();
+        }
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.CompareTag("Player") == true)
+            {
+                agent.isStopped = true;
+                tankController.attackPlayer(other.gameObject.transform);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                agent.isStopped = false;
+            }
         }
 
         public void GetDamage(int damage)

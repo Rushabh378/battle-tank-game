@@ -29,6 +29,12 @@ namespace TankBattle.MVC.Enemy
             this.tankView.setTankController(this);
         }
 
+        internal void attackPlayer(Transform player)
+        {
+            tankView.transform.LookAt(player);
+            tankView.transform.position = Vector3.MoveTowards(tankView.transform.position, player.position, 0.1f);
+        }
+
         internal void MinusHealth(int damage)
         {
             tankModel.Health -= damage;
