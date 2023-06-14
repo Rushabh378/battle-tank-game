@@ -14,14 +14,9 @@ namespace TankBattle.MVC.Enemy
             agent = GetComponent<NavMeshAgent>();
         }
 
-        public void setTankController(TankController tankController)
-        {
-            this.tankController = tankController;
-        }
-
         public void Update()
         {
-            //tankController.Patrol();
+            tankController.Patrol();
         }
 
         private void OnTriggerStay(Collider other)
@@ -39,6 +34,20 @@ namespace TankBattle.MVC.Enemy
             {
                 agent.isStopped = false;
             }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
+            if(damagable != null)
+            {
+                damagable.GetDamage(100);
+            }
+        }
+
+        public void setTankController(TankController tankController)
+        {
+            this.tankController = tankController;
         }
 
         public void GetDamage(int damage)

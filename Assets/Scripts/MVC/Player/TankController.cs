@@ -1,4 +1,5 @@
-using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TankBattle.MVC.Player
@@ -39,10 +40,21 @@ namespace TankBattle.MVC.Player
             
         }
 
-        public void ShootingBullet(Vector3 position)
+        internal void ShootingBullet(Vector3 position)
         {
             GameObject bullet = GameObject.Instantiate(tankModel.bullet, position, tankView.transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankModel.Force, ForceMode.Impulse);
+        }
+
+        internal void MinusHealth(int damage)
+        {
+            tankModel.Health -= damage;
+            if (tankModel.Health <= 0)
+            {
+                Debug.Log("Player died.");
+                IEnumerator destroyEverything = tankView.StartDestroyingEverything();
+                tankView.StartCoroutine(destroyEverything);
+            }
         }
     }
 }
