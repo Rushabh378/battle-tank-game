@@ -8,8 +8,8 @@ namespace TankBattle.MVC.Enemy
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyTankView : MonoBehaviour, IDamagable
     {
-        public Transform FirePosition;
-        public float AttackDistance = 5f;
+        public Transform firePosition;
+        public float attackDistance = 5f;
         private TankController tankController;
         [HideInInspector] internal NavMeshAgent agent;
 
@@ -67,8 +67,10 @@ namespace TankBattle.MVC.Enemy
         public IEnumerator ShootingBullet()
         {
             tankController.bulletThrowen = false;
-            GameObject bullet = Instantiate(tankController.tankModel.Bullet, FirePosition.position, transform.rotation);
+
+            GameObject bullet = Instantiate(tankController.tankModel.Bullet, firePosition.position, transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankController.tankModel.Force, ForceMode.Impulse);
+
             yield return new WaitForSeconds(5f);
             tankController.bulletThrowen = true;
         }

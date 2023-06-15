@@ -192,5 +192,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c25dcf0b63d91a4bab855d99f4da0b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FirePosition: {fileID: 8599864405604809692}
-  AttackDistance: 5
+  firePosition: {fileID: 8599864405604809692}
+  attackDistance: 5

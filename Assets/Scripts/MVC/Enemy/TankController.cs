@@ -34,6 +34,7 @@ namespace TankBattle.MVC.Enemy
             this.tankView.setTankController(this);
 
             CurrentState = Idle;
+            CurrentState.OnEnter(this);
         }
 
         internal void SetAgent(NavMeshAgent agent)

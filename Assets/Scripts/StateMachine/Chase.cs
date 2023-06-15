@@ -23,7 +23,7 @@ namespace TankBattle.StateMachine
 
             if(player != null)
             {
-                if (Vector3.Distance(controller.tankView.transform.position, player.position) <= controller.tankView.AttackDistance)
+                if (Vector3.Distance(controller.tankView.transform.position, player.position) <= controller.tankView.attackDistance)
                 {
                     controller.ChangeState(controller.Attack);
                 }

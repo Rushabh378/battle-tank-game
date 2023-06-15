@@ -20,9 +20,9 @@ namespace TankBattle.StateMachine
 
             if (controller.target != null && controller.bulletThrowen)
             {
-                if (Vector3.Distance(controller.tankView.transform.position, controller.target.position) <= controller.tankView.AttackDistance)
+                if (Vector3.Distance(controller.tankView.transform.position, controller.target.position) <= controller.tankView.attackDistance)
                 {
-                    controller.tankView.StartCoroutine("ShootingBullet");
+                    controller.tankView.StartCoroutine(coroutine);
                 }
                 else
                 {
