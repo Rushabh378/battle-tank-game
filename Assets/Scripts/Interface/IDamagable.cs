@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace TankBattle
+namespace TankBattle.Interface
 {
     public interface IDamagable
     {

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Super Player Tank
   m_EditorClassIdentifier: 
   health: 150
-  bulletPrefab: {fileID: -1966490491249792187, guid: 52ad8102f4405894cb7cb2a94b4c9a1c,
+  bulletPrefab: {fileID: -1966490491249792187, guid: e73b9c4d72165dd428611127a2d22f83,
     type: 3}
   firePower: 30
   movementSpeed: 20
