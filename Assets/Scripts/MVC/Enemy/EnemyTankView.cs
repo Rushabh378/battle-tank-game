@@ -45,15 +45,6 @@ namespace TankBattle.MVC.Enemy
             }
         }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            IDamagable damagable = collision.gameObject.GetComponent<IDamagable>();
-            if(damagable != null)
-            {
-                damagable.GetDamage(100);
-            }
-        }
-
         public void setTankController(TankController tankController)
         {
             this.tankController = tankController;
@@ -73,6 +64,11 @@ namespace TankBattle.MVC.Enemy
 
             yield return new WaitForSeconds(5f);
             tankController.bulletThrowen = true;
+        }
+        
+        private void OnDestroy()
+        {
+            tankController.CurrentState.OnExit(tankController);
         }
 
     }

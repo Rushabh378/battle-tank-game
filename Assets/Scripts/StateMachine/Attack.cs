@@ -18,7 +18,7 @@ namespace TankBattle.StateMachine
         {
             base.OnUpdate(controller);
 
-            if (controller.target != null && controller.bulletThrowen)
+            if (controller.target != null && controller.bulletThrowen == true)
             {
                 if (Vector3.Distance(controller.tankView.transform.position, controller.target.position) <= controller.tankView.attackDistance)
                 {

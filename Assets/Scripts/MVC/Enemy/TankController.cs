@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using TankBattle.StateMachine;
+using System;
 
 namespace TankBattle.MVC.Enemy
 {
@@ -19,6 +20,8 @@ namespace TankBattle.MVC.Enemy
         public State Patrol = new Patrol();
         public State Chase = new Chase();
         public State Attack = new Attack();
+
+        public static event Action OnEnemyDeath;
 
         public TankController(TankModel tankModel, EnemyTankView tankView, Vector3 position)
         {
@@ -47,7 +50,8 @@ namespace TankBattle.MVC.Enemy
             tankModel.Health -= damage;
             if (tankModel.Health <= 0)
             {
-                tankView.gameObject.SetActive(false);
+                GameObject.Destroy(tankView.gameObject);
+                OnEnemyDeath?.Invoke();
             }
         }
 
