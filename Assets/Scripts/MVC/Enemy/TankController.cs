@@ -14,7 +14,7 @@ namespace TankBattle.MVC.Enemy
         internal NavMeshAgent agent;
         internal Transform target;
         internal bool bulletThrowen = true;
-        // State Machine
+
         public State CurrentState;
         public State Idle = new Idle();
         public State Patrol = new Patrol();

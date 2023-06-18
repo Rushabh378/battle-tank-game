@@ -3,6 +3,13 @@ using UnityEngine;
 
 namespace TankBattle
 {
+    public enum Rank
+    {
+        none,
+        bronz,
+        silver,
+        gold
+    }
     public enum AvailableTank
     {
         none = -1,

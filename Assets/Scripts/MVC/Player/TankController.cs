@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,9 +11,7 @@ namespace TankBattle.MVC.Player
         private TankView tankView;
         private Rigidbody rigidBody;
 
-        private Material[] tankMaterial;
-                            
-
+        public static event Action OnPlayerShoot;
 
         public TankController(TankModel tankModel,TankView tankView, Vector3 position)
         {
@@ -44,6 +43,7 @@ namespace TankBattle.MVC.Player
         {
             GameObject bullet = GameObject.Instantiate(tankModel.bullet, position, tankView.transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankModel.Force, ForceMode.Impulse);
+            OnPlayerShoot?.Invoke();
         }
 
         internal void MinusHealth(int damage)
