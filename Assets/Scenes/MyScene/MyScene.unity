@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pools:
-  - tag: normal bullets
+  - tag: 1
     prefab: {fileID: 4032817544721827188, guid: 52ad8102f4405894cb7cb2a94b4c9a1c,
       type: 3}
     size: 15

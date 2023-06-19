@@ -3,27 +3,19 @@ using UnityEngine;
 
 namespace TankBattle
 {
+    public enum PoolTag
+    {
+        none,
+        normalBullet,
+        superBullet,
+        noramlTank,
+        SuperTank
+    }
     public enum Rank
     {
         none,
         bronz,
         silver,
         gold
-    }
-    public enum AvailableTank
-    {
-        none = -1,
-        playerTankGreen,
-        playerTankBlue,
-        enemyTankRed,
-        enemyTankYellow
-    }
-    public enum Color
-    {
-        none,
-        green,
-        blue,
-        red,
-        yellow
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using TankBattle.Interface;
 
 namespace TankBattle.Singleton
 {
     public class GameObjectPooler : GenericSingleton<GameObjectPooler>
     {
-        private Dictionary<string, Queue<GameObject>> poolDictionary;
+        private Dictionary<PoolTag, Queue<GameObject>> poolDictionary;
   
         [System.Serializable] private class Pool
         {
-            public string tag;
+            public PoolTag tag;
             public GameObject prefab;
             public int size;
         }
@@ -17,13 +18,13 @@ namespace TankBattle.Singleton
 
         private void Start()
         {
-            poolDictionary = new Dictionary<string, Queue<GameObject>>();
+            poolDictionary = new Dictionary<PoolTag, Queue<GameObject>>();
 
-            foreach(Pool pool in pools)
+            foreach (Pool pool in pools)
             {
                 Queue<GameObject> objectsPool = new Queue<GameObject>();
 
-                for(int i = 0; i < pool.size; i++)
+                for (int i = 0; i < pool.size; i++)
                 {
                     GameObject obj = Instantiate(pool.prefab);
                     obj.SetActive(false);
@@ -34,10 +35,11 @@ namespace TankBattle.Singleton
             }
         }
 
-        public GameObject GetFromPool(string tag, Vector3 position, Quaternion rotation)
+        public GameObject GetFromPool(PoolTag tag, Vector3 position, Quaternion rotation)
         {
             if(poolDictionary.ContainsKey(tag) == false)
             {
+                Debug.LogWarning("there is no pool found with tag : " + tag);
                 return null;
             }
 
@@ -46,6 +48,12 @@ namespace TankBattle.Singleton
             objectToGet.SetActive(true);
             objectToGet.transform.position = position;
             objectToGet.transform.rotation = rotation;
+
+            IPooledObject pooled = objectToGet.GetComponent<IPooledObject>();
+            if(pooled != null)
+            {
+                pooled.OnObjectPooled();
+            }
 
             poolDictionary[tag].Enqueue(objectToGet);
 

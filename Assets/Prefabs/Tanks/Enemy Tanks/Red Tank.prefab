@@ -193,4 +193,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePosition: {fileID: 8599864405604809692}
-  attackDistance: 5
+  attackDistance: 7

@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using TankBattle.Interface;
+using TankBattle.Singleton;
 
 namespace TankBattle.MVC.Enemy
 {
@@ -31,8 +32,11 @@ namespace TankBattle.MVC.Enemy
             if (other.CompareTag("Player") == true)
             {
                 agent.isStopped = true;
-                tankController.ChangeState(tankController.Chase);
-                tankController.CurrentState.OnTrigger(tankController, other);
+                if(tankController.CurrentState == tankController.Patrol)
+                {
+                    tankController.ChangeState(tankController.Chase);
+                    tankController.CurrentState.OnTrigger(tankController, other);
+                }
             }
         }
 
@@ -59,11 +63,15 @@ namespace TankBattle.MVC.Enemy
         {
             tankController.bulletThrowen = false;
 
-            GameObject bullet = Instantiate(tankController.tankModel.Bullet, firePosition.position, transform.rotation);
+            GameObject bullet = GameObjectPooler.Instance.GetFromPool(PoolTag.normalBullet, firePosition.position, transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankController.tankModel.Force, ForceMode.Impulse);
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
             tankController.bulletThrowen = true;
+            if(tankController.CurrentState == tankController.Attack)
+            {
+                tankController.ChangeState(tankController.Chase);
+            }
         }
         
         private void OnDestroy()

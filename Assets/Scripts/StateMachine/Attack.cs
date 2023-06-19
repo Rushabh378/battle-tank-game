@@ -9,33 +9,14 @@ namespace TankBattle.StateMachine
         IEnumerator coroutine;
         public override void OnEnter(TankController controller)
         {
+            Debug.Log("Enemy " + controller.tankView.gameObject.name + " is in Attack state");
             base.OnEnter(controller);
             coroutine = controller.tankView.ShootingBullet();
-            controller.tankView.StartCoroutine(coroutine);
-        }
 
-        public override void OnUpdate(TankController controller)
-        {
-            base.OnUpdate(controller);
-
-            if (controller.target != null && controller.bulletThrowen == true)
+            if (controller.bulletThrowen == true)
             {
-                if (Vector3.Distance(controller.tankView.transform.position, controller.target.position) <= controller.tankView.attackDistance)
-                {
-                    controller.tankView.StartCoroutine(coroutine);
-                }
-                else
-                {
-                    controller.ChangeState(controller.Chase);
-                }
+                controller.tankView.StartCoroutine(coroutine);
             }
-        }
-
-        public override void OnExit(TankController controller)
-        {
-            base.OnExit(controller);
-            controller.tankView.StopCoroutine(coroutine);
-            coroutine = null;
         }
     }
 }

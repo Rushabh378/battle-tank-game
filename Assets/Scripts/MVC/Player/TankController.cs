@@ -42,9 +42,12 @@ namespace TankBattle.MVC.Player
 
         internal void ShootingBullet(Vector3 position)
         {
-            GameObject bullet = GameObjectPooler.Instance.GetFromPool("normal bullets", position, tankView.transform.rotation);
-            bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankModel.Force, ForceMode.Impulse);
-            OnPlayerShoot?.Invoke();
+            GameObject bullet = GameObjectPooler.Instance.GetFromPool(PoolTag.normalBullet, position, tankView.transform.rotation);
+            if(bullet != null)
+            {
+                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankModel.Force, ForceMode.Impulse);
+                OnPlayerShoot?.Invoke();
+            }
         }
 
         internal void MinusHealth(int damage)
