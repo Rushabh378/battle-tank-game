@@ -29,17 +29,17 @@ namespace TankBattle.UI
                 case 1:
                     achievementText[0].text = "bronz achievement unlocked";
                     achievementText[1].text = "shooted first time.";
-                    popUp.SetTrigger("Killed Enemy");
+                    popUp.SetTrigger("Achievement");
                     break;
                 case 5:
                     achievementText[0].text = "silver achievement unlocked";
                     achievementText[1].text = shootCount + " bullets shooted";
-                    popUp.SetTrigger("Killed Enemy");
+                    popUp.SetTrigger("Achievement");
                     break;
                 case 10:
                     achievementText[0].text = "silver achievement unlocked";
                     achievementText[1].text = shootCount + " bullets shooted";
-                    popUp.SetTrigger("Killed Enemy");
+                    popUp.SetTrigger("Achievement");
                     break;
             }
         }
@@ -65,7 +65,7 @@ namespace TankBattle.UI
                 default:
                     break;
             }
-            popUp.SetTrigger("Killed Enemy");
+            popUp.SetTrigger("Achievement");
         }
         private void OnDestroy()
         {

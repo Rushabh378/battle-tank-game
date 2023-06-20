@@ -280,7 +280,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tankView: {fileID: 4981436885122621320, guid: bd82c8d2b7065054abb66d0bbcc52716,
     type: 3}
-  tankType: {fileID: 11400000, guid: dea38c5f0edd579498ff4e8e95ae13b1, type: 2}
+  tankType: {fileID: 11400000, guid: 98c59c598a46aa149b67b8c680c102f1, type: 2}
 --- !u!4 &529138052
 Transform:
   m_ObjectHideFlags: 0
@@ -372,9 +372,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec18f26e949bfb244bfbf1b816cb00d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankView: {fileID: 7936654925454872712, guid: ebca72b077646c643afe81efebeaa15c,
+  tankView: {fileID: 7936654925454872712, guid: 75bf03bc144e0d643a3d5f37988efc25,
     type: 3}
-  tankType: {fileID: 11400000, guid: 8124e53abf89c274db6cd88a241455d8, type: 2}
+  tankType: {fileID: 11400000, guid: 3c25713dc2601284d9633fe01abbf924, type: 2}
   patrolingRange: 30
 --- !u!1 &692331827
 GameObject:
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tankView: {fileID: 7936654925454872712, guid: 75bf03bc144e0d643a3d5f37988efc25,
     type: 3}
-  tankType: {fileID: 11400000, guid: 8124e53abf89c274db6cd88a241455d8, type: 2}
+  tankType: {fileID: 11400000, guid: e431156f709370b4b9f63019783a1c4e, type: 2}
   patrolingRange: 30
 --- !u!1 &1221174450
 GameObject:
@@ -1003,6 +1003,10 @@ MonoBehaviour:
     prefab: {fileID: 4032817544721827188, guid: 52ad8102f4405894cb7cb2a94b4c9a1c,
       type: 3}
     size: 15
+  - tag: 3
+    prefab: {fileID: 4564438690089551250, guid: 75bf03bc144e0d643a3d5f37988efc25,
+      type: 3}
+    size: 5
 --- !u!4 &1461082371
 Transform:
   m_ObjectHideFlags: 0
@@ -1281,7 +1285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec18f26e949bfb244bfbf1b816cb00d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankView: {fileID: 7936654925454872712, guid: 143426b214ef7c74ab41d2c83390a016,
+  tankView: {fileID: 7936654925454872712, guid: 75bf03bc144e0d643a3d5f37988efc25,
     type: 3}
-  tankType: {fileID: 11400000, guid: 8124e53abf89c274db6cd88a241455d8, type: 2}
+  tankType: {fileID: 11400000, guid: aa3d10ba5fc26dd43af771623d83b109, type: 2}
   patrolingRange: 30

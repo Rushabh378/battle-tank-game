@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 using TankBattle.StateMachine;
+using TankBattle.Singleton;
 using System;
 
 namespace TankBattle.MVC.Enemy
@@ -23,21 +24,32 @@ namespace TankBattle.MVC.Enemy
 
         public static event Action OnEnemyDeath;
 
-        public TankController(TankModel tankModel, EnemyTankView tankView, Vector3 position)
+        public TankController(TankModel tankModel, Vector3 position)
         {
             this.tankModel = tankModel;
 
             if (NavMesh.SamplePosition(position, out closestHit, 100f, 1))
             {
-                position = center = closestHit.position;
-                this.tankView = GameObject.Instantiate<EnemyTankView>(tankView, position, Quaternion.identity);
+                center = closestHit.position;
+                tankView = GameObjectPooler.Instance.GetFromPool(tankModel.Tag, closestHit.position, Quaternion.identity).GetComponent<EnemyTankView>();
             }
 
-            this.tankModel.setTankController(this);
-            this.tankView.setTankController(this);
+            this.tankModel.SetTankController(this);
+            tankView.SetTankController(this);
+
+            SetTankColor();
 
             CurrentState = Idle;
             CurrentState.OnEnter(this);
+        }
+
+        private void SetTankColor()
+        {
+            Renderer[] renderers = tankView.GetComponentsInChildren<Renderer>();
+            for(int i = 0; i < renderers.Length; i++)
+            {
+                renderers[i].material.SetColor("_Color", tankModel.TankColor);
+            }
         }
 
         internal void SetAgent(NavMeshAgent agent)
@@ -50,8 +62,9 @@ namespace TankBattle.MVC.Enemy
             tankModel.Health -= damage;
             if (tankModel.Health <= 0)
             {
-                GameObject.Destroy(tankView.gameObject);
+                tankView.gameObject.SetActive(false);
                 OnEnemyDeath?.Invoke();
+                //tankView.OnEnemyDeath.TriggerEvent();
             }
         }
 

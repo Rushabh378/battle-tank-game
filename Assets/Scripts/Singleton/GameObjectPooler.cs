@@ -42,6 +42,10 @@ namespace TankBattle.Singleton
                 Debug.LogWarning("there is no pool found with tag : " + tag);
                 return null;
             }
+            if(position == null)
+            {
+                Debug.Log("position is null");
+            }
 
             GameObject objectToGet = poolDictionary[tag].Dequeue();
 

@@ -8,8 +8,8 @@ namespace TankBattle
         none,
         normalBullet,
         superBullet,
-        noramlTank,
-        SuperTank
+        normalTank,
+        superTank
     }
     public enum Rank
     {

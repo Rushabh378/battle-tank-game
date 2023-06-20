@@ -3,16 +3,23 @@ using UnityEngine;
 using UnityEngine.AI;
 using TankBattle.Interface;
 using TankBattle.Singleton;
+using TankBattle.ScriptableObjects;
 
 namespace TankBattle.MVC.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyTankView : MonoBehaviour, IDamagable
+    public class EnemyTankView : MonoBehaviour, IDamagable,IPooledObject
     {
+        [HideInInspector] internal NavMeshAgent agent;
         public Transform firePosition;
         public float attackDistance = 5f;
+
         private TankController tankController;
-        [HideInInspector] internal NavMeshAgent agent;
+
+        public void SetTankController(TankController tankController)
+        {
+            this.tankController = tankController;
+        }
 
         public void Start()
         {
@@ -20,6 +27,11 @@ namespace TankBattle.MVC.Enemy
             tankController.SetAgent(agent);
 
             tankController.ChangeState(tankController.Patrol);
+        }
+
+        public void OnObjectPooled()
+        {
+            
         }
 
         public void Update()
@@ -49,11 +61,6 @@ namespace TankBattle.MVC.Enemy
             }
         }
 
-        public void setTankController(TankController tankController)
-        {
-            this.tankController = tankController;
-        }
-
         public void GetDamage(int damage)
         {
             tankController.MinusHealth(damage);
@@ -73,11 +80,5 @@ namespace TankBattle.MVC.Enemy
                 tankController.ChangeState(tankController.Chase);
             }
         }
-        
-        private void OnDestroy()
-        {
-            tankController.CurrentState.OnExit(tankController);
-        }
-
     }
 }
