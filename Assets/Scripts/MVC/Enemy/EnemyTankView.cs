@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.AI;
 using TankBattle.Interface;
 using TankBattle.Singleton;
-using TankBattle.ScriptableObjects;
 
 namespace TankBattle.MVC.Enemy
 {
@@ -41,7 +40,7 @@ namespace TankBattle.MVC.Enemy
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.CompareTag("Player") == true)
+            if (other.gameObject.GetComponent<MVC.Player.TankView>() != null)
             {
                 agent.isStopped = true;
                 if(tankController.CurrentState == tankController.Patrol)
@@ -68,13 +67,11 @@ namespace TankBattle.MVC.Enemy
 
         public IEnumerator ShootingBullet()
         {
-            tankController.bulletThrowen = false;
-
-            GameObject bullet = GameObjectPooler.Instance.GetFromPool(PoolTag.normalBullet, firePosition.position, transform.rotation);
+            GameObject bullet = GameObjectPooler.Singleton.FetchFromPool(PoolTag.normalBullet, firePosition.position, transform.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankController.tankModel.Force, ForceMode.Impulse);
 
             yield return new WaitForSeconds(3f);
-            tankController.bulletThrowen = true;
+
             if(tankController.CurrentState == tankController.Attack)
             {
                 tankController.ChangeState(tankController.Chase);

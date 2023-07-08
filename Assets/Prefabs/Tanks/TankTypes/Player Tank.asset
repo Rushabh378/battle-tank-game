@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675efd0f0ff087244b6e0f6bddfbbe13, type: 3}
   m_Name: Player Tank
   m_EditorClassIdentifier: 
+  tag: 3
   health: 100
   bulletPrefab: {fileID: 5747712713417540059, guid: 52ad8102f4405894cb7cb2a94b4c9a1c,
     type: 3}
   color: {r: 0.058823533, g: 0.352682, b: 0.98039216, a: 0}
   firePower: 20
   movementSpeed: 17
-  rotationSpeed: 150
+  rotationSpeed: 100

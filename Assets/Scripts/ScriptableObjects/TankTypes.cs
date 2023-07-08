@@ -5,6 +5,7 @@ namespace TankBattle.ScriptableObjects
     [CreateAssetMenu(fileName = "Tank", menuName = "Scriptable Objects/Tank Type")]
     public class TankTypes : ScriptableObject
     {
+        public PoolTag tag;
         public int health = 100;
         public Damager bulletPrefab;
         public Color color;

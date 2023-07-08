@@ -17,7 +17,8 @@ namespace TankBattle.MVC.Enemy
             this.range = range;
         }
 
-        public PoolTag Tag => PoolTag.normalTank;
+        public string TankName => tankType.name;
+        public PoolTag Tag => tankType.tag;
         public Color TankColor => tankType.color;
         public float PatrolingRange => range;
         public int Health { get => health; set => health = value; }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TankBattle.Interface;
+using TankBattle.ScriptableObjects;
 
 namespace TankBattle.MVC.Player
 {
@@ -11,6 +12,8 @@ namespace TankBattle.MVC.Player
         private float movement;
         private float rotation;
         private IEnumerator coroutine;
+
+        public GameEvents OnDeathEvent;
 
         public void setTankController(TankController tankController)
         {

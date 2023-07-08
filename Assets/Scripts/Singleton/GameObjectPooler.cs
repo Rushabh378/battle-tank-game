@@ -16,7 +16,7 @@ namespace TankBattle.Singleton
         }
         [SerializeField] private List<Pool> pools;
 
-        private void Start()
+        private void OnEnable()
         {
             poolDictionary = new Dictionary<PoolTag, Queue<GameObject>>();
 
@@ -35,16 +35,13 @@ namespace TankBattle.Singleton
             }
         }
 
-        public GameObject GetFromPool(PoolTag tag, Vector3 position, Quaternion rotation)
+        public GameObject FetchFromPool(PoolTag tag, Vector3 position, Quaternion rotation)
         {
+
             if(poolDictionary.ContainsKey(tag) == false)
             {
                 Debug.LogWarning("there is no pool found with tag : " + tag);
                 return null;
-            }
-            if(position == null)
-            {
-                Debug.Log("position is null");
             }
 
             GameObject objectToGet = poolDictionary[tag].Dequeue();

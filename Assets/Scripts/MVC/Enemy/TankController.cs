@@ -31,7 +31,7 @@ namespace TankBattle.MVC.Enemy
             if (NavMesh.SamplePosition(position, out closestHit, 100f, 1))
             {
                 center = closestHit.position;
-                tankView = GameObjectPooler.Instance.GetFromPool(tankModel.Tag, closestHit.position, Quaternion.identity).GetComponent<EnemyTankView>();
+                tankView = GameObjectPooler.Singleton.FetchFromPool(tankModel.Tag, closestHit.position, Quaternion.identity).GetComponent<EnemyTankView>();
             }
 
             this.tankModel.SetTankController(this);

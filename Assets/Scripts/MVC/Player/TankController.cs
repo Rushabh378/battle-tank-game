@@ -11,8 +11,9 @@ namespace TankBattle.MVC.Player
         private TankModel tankModel;
         private TankView tankView;
         private Rigidbody rigidBody;
+        
 
-        public static event Action OnPlayerShoot;
+       /// public static event Action OnPlayerShoot;
 
         public TankController(TankModel tankModel,TankView tankView, Vector3 position)
         {
@@ -42,11 +43,12 @@ namespace TankBattle.MVC.Player
 
         internal void ShootingBullet(Vector3 position)
         {
-            GameObject bullet = GameObjectPooler.Instance.GetFromPool(PoolTag.normalBullet, position, tankView.transform.rotation);
+            GameObject bullet = GameObjectPooler.Singleton.FetchFromPool(PoolTag.normalBullet, position, tankView.transform.rotation);
             if(bullet != null)
             {
                 bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankModel.Force, ForceMode.Impulse);
-                OnPlayerShoot?.Invoke();
+                //OnPlayerShoot?.Invoke();
+                tankView.OnDeathEvent.TriggerEvent();
             }
         }
 
