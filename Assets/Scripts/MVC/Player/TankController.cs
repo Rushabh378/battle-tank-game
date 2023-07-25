@@ -13,7 +13,7 @@ namespace TankBattle.MVC.Player
         private Rigidbody rigidBody;
         
 
-       /// public static event Action OnPlayerShoot;
+        public static event Action OnPlayerShoot;
 
         public TankController(TankModel tankModel,TankView tankView, Vector3 position)
         {
@@ -47,8 +47,7 @@ namespace TankBattle.MVC.Player
             if(bullet != null)
             {
                 bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankModel.Force, ForceMode.Impulse);
-                //OnPlayerShoot?.Invoke();
-                tankView.OnDeathEvent.TriggerEvent();
+                OnPlayerShoot?.Invoke();
             }
         }
 
@@ -57,7 +56,6 @@ namespace TankBattle.MVC.Player
             tankModel.Health -= damage;
             if (tankModel.Health <= 0)
             {
-                Debug.Log("Player died.");
                 IEnumerator destroyEverything = tankView.StartDestroyingEverything();
                 tankView.StartCoroutine(destroyEverything);
             }

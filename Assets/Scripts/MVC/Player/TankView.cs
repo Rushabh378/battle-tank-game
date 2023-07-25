@@ -7,13 +7,11 @@ namespace TankBattle.MVC.Player
 {
     public class TankView : MonoBehaviour, IDamagable
     {
-        [SerializeField] internal Transform shootPosition;
+        public Transform shootPosition;
         private TankController tankController;
         private float movement;
         private float rotation;
         private IEnumerator coroutine;
-
-        public GameEvents OnDeathEvent;
 
         public void setTankController(TankController tankController)
         {

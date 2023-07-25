@@ -64,7 +64,6 @@ namespace TankBattle.MVC.Enemy
             {
                 tankView.gameObject.SetActive(false);
                 OnEnemyDeath?.Invoke();
-                //tankView.OnEnemyDeath.TriggerEvent();
             }
         }
 

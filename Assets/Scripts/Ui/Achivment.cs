@@ -17,8 +17,8 @@ namespace TankBattle.UI
         {
             popUp = GetComponent<Animator>();
             achievementText = GetComponentsInChildren<TextMeshProUGUI>();
-            //MVC.Enemy.TankController.OnEnemyDeath += EnemyKillAchievement;
-            //MVC.Player.TankController.OnPlayerShoot += ShootingAchievement;
+            MVC.Enemy.TankController.OnEnemyDeath += EnemyKillAchievement;
+            MVC.Player.TankController.OnPlayerShoot += ShootingAchievement;
         }
 
         public void ShootingAchievement()
@@ -69,8 +69,8 @@ namespace TankBattle.UI
         }
         private void OnDestroy()
         {
-            //MVC.Enemy.TankController.OnEnemyDeath -= EnemyKillAchievement;
-             //MVC.Player.TankController.OnPlayerShoot -= ShootingAchievement;
+            MVC.Enemy.TankController.OnEnemyDeath -= EnemyKillAchievement;
+            MVC.Player.TankController.OnPlayerShoot -= ShootingAchievement;
         }
     }
 }
