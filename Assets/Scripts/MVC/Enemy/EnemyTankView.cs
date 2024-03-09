@@ -1,32 +1,81 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
+using TankBattle.Interface;
+using TankBattle.Singleton;
 
 namespace TankBattle.MVC.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyTankView : MonoBehaviour, IDamagable
+    public class EnemyTankView : MonoBehaviour, IDamagable,IPooledObject
     {
+        [HideInInspector] internal NavMeshAgent agent;
+        public Transform firePosition;
+        public float attackDistance = 5f;
+
         private TankController tankController;
-        [HideInInspector] public NavMeshAgent agent;
+
+        public void SetTankController(TankController tankController)
+        {
+            this.tankController = tankController;
+        }
 
         public void Start()
         {
             agent = GetComponent<NavMeshAgent>();
+            tankController.SetAgent(agent);
+
+            tankController.ChangeState(tankController.Patrol);
+        }
+
+        public void OnObjectPooled()
+        {
+            
         }
 
         public void Update()
         {
-            tankController.Patrol();
+            tankController.CurrentState.OnUpdate(tankController);
         }
 
-        public void setTankController(TankController tankController)
+        private void OnTriggerStay(Collider other)
         {
-            this.tankController = tankController;
+            if (other.gameObject.GetComponent<MVC.Player.TankView>() != null)
+            {
+                agent.isStopped = true;
+                if(tankController.CurrentState == tankController.Patrol)
+                {
+                    tankController.ChangeState(tankController.Chase);
+                    tankController.CurrentState.OnTrigger(tankController, other);
+                }
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                agent.isStopped = false;
+                tankController.ChangeState(tankController.Patrol);
+            }
         }
 
         public void GetDamage(int damage)
         {
             tankController.MinusHealth(damage);
+        }
+
+        public IEnumerator ShootingBullet()
+        {
+            GameObject bullet = GameObjectPooler.Singleton.FetchFromPool(PoolTag.normalBullet, firePosition.position, transform.rotation);
+            bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankController.tankModel.Force, ForceMode.Impulse);
+
+            yield return new WaitForSeconds(3f);
+
+            if(tankController.CurrentState == tankController.Attack)
+            {
+                tankController.ChangeState(tankController.Chase);
+            }
         }
     }
 }

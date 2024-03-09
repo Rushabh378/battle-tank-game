@@ -6,7 +6,7 @@ namespace TankBattle.Singleton
     {
 
         private static T instance;
-        public static T Instance { get { return instance; } }
+        public static T Singleton { get { return instance; } }
 
         private void Awake()
         {

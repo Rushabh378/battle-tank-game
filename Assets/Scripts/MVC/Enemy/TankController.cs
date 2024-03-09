@@ -1,32 +1,60 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
+using TankBattle.StateMachine;
+using TankBattle.Singleton;
+using System;
 
 namespace TankBattle.MVC.Enemy
 {
     public class TankController
     {
-        private TankModel tankModel;
-        private EnemyTankView tankView;
-        private NavMeshHit closestHit;
-        private Vector3 point;
-        private Vector3 center;
+        internal TankModel tankModel;
+        internal EnemyTankView tankView;
+        internal NavMeshHit closestHit;
+        internal Vector3 center;
+        internal NavMeshAgent agent;
+        internal Transform target;
+        internal bool bulletThrowen = true;
 
-        public TankController(TankModel tankModel, EnemyTankView tankView, Vector3 position)
+        public State CurrentState;
+        public State Idle = new Idle();
+        public State Patrol = new Patrol();
+        public State Chase = new Chase();
+        public State Attack = new Attack();
+
+        public static event Action OnEnemyDeath;
+
+        public TankController(TankModel tankModel, Vector3 position)
         {
             this.tankModel = tankModel;
 
             if (NavMesh.SamplePosition(position, out closestHit, 100f, 1))
             {
-                position = center = closestHit.position;
-                this.tankView = GameObject.Instantiate<EnemyTankView>(tankView, position, Quaternion.identity);
-            }
-            else
-            {
-                Debug.Log("NavMesh Agent isn't working yet.");
+                center = closestHit.position;
+                tankView = GameObjectPooler.Singleton.FetchFromPool(tankModel.Tag, closestHit.position, Quaternion.identity).GetComponent<EnemyTankView>();
             }
 
-            this.tankModel.setTankController(this);
-            this.tankView.setTankController(this);
+            this.tankModel.SetTankController(this);
+            tankView.SetTankController(this);
+
+            SetTankColor();
+
+            CurrentState = Idle;
+            CurrentState.OnEnter(this);
+        }
+
+        private void SetTankColor()
+        {
+            Renderer[] renderers = tankView.GetComponentsInChildren<Renderer>();
+            for(int i = 0; i < renderers.Length; i++)
+            {
+                renderers[i].material.SetColor("_Color", tankModel.TankColor);
+            }
+        }
+
+        internal void SetAgent(NavMeshAgent agent)
+        {
+            this.agent = agent;
         }
 
         internal void MinusHealth(int damage)
@@ -35,36 +63,15 @@ namespace TankBattle.MVC.Enemy
             if (tankModel.Health <= 0)
             {
                 tankView.gameObject.SetActive(false);
+                OnEnemyDeath?.Invoke();
             }
         }
 
-        internal void Patrol()
+        public void ChangeState(State state)
         {
-            tankView.agent.stoppingDistance = 5f;
-            if(tankView.agent.remainingDistance <= tankView.agent.stoppingDistance)
-            {
-                point = RandomPoint(center, tankModel.patrolingRange);
-                if (point != Vector3.zero)
-                {
-                    tankView.agent.SetDestination(point);
-                }
-            }
-        }
-
-        Vector3 RandomPoint(Vector3 center, float range)
-        {
-
-            Vector3 randomPoint = center + Random.insideUnitSphere * range;  
-            NavMeshHit hit;
-            Vector3 result;
-            if (NavMesh.SamplePosition(randomPoint, out hit, range, 1)) 
-            {
-                result = hit.position;
-                return result;
-            }
-
-            result = Vector3.zero;
-            return result;
+            CurrentState.OnExit(this);
+            CurrentState = state;
+            CurrentState.OnEnter(this);
         }
     }
 }

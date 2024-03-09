@@ -16,10 +16,16 @@ namespace TankBattle.MVC.Enemy
             this.health = tankType.health;
             this.range = range;
         }
-        public float patrolingRange => range;
-        public int Health { get => health; set => health = value; }
 
-        public void setTankController(TankController tankController)
+        public string TankName => tankType.name;
+        public PoolTag Tag => tankType.tag;
+        public Color TankColor => tankType.color;
+        public float PatrolingRange => range;
+        public int Health { get => health; set => health = value; }
+        public GameObject Bullet => tankType.bulletPrefab.gameObject;
+        public float Force { get => tankType.firePower; set => tankType.firePower = value; }
+
+        public void SetTankController(TankController tankController)
         {
             this.tankController = tankController;
         }

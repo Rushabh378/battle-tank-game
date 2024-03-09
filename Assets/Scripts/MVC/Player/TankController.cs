@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using TankBattle.Singleton;
 
 namespace TankBattle.MVC.Player
 {
@@ -8,10 +11,9 @@ namespace TankBattle.MVC.Player
         private TankModel tankModel;
         private TankView tankView;
         private Rigidbody rigidBody;
+        
 
-        private Material[] tankMaterial;
-                            
-
+        public static event Action OnPlayerShoot;
 
         public TankController(TankModel tankModel,TankView tankView, Vector3 position)
         {
@@ -39,10 +41,24 @@ namespace TankBattle.MVC.Player
             
         }
 
-        public void ShootingBullet(Vector3 position)
+        internal void ShootingBullet(Vector3 position)
         {
-            GameObject bullet = GameObject.Instantiate(tankModel.bullet, position, tankView.transform.rotation);
-            bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankModel.Force, ForceMode.Impulse);
+            GameObject bullet = GameObjectPooler.Singleton.FetchFromPool(PoolTag.normalBullet, position, tankView.transform.rotation);
+            if(bullet != null)
+            {
+                bullet.GetComponent<Rigidbody>().AddForce(bullet.transform.forward * tankModel.Force, ForceMode.Impulse);
+                OnPlayerShoot?.Invoke();
+            }
+        }
+
+        internal void MinusHealth(int damage)
+        {
+            tankModel.Health -= damage;
+            if (tankModel.Health <= 0)
+            {
+                IEnumerator destroyEverything = tankView.StartDestroyingEverything();
+                tankView.StartCoroutine(destroyEverything);
+            }
         }
     }
 }
