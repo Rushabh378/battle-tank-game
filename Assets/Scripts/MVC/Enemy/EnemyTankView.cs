@@ -7,7 +7,7 @@ using TankBattle.Singleton;
 namespace TankBattle.MVC.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyTankView : MonoBehaviour, IDamagable,IPooledObject
+    public class EnemyTankView : MonoBehaviour, IDamagable
     {
         [HideInInspector] internal NavMeshAgent agent;
         public Transform firePosition;
@@ -26,11 +26,6 @@ namespace TankBattle.MVC.Enemy
             tankController.SetAgent(agent);
 
             tankController.ChangeState(tankController.Patrol);
-        }
-
-        public void OnObjectPooled()
-        {
-            
         }
 
         public void Update()

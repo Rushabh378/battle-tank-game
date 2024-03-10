@@ -11,7 +11,6 @@ namespace TankBattle.MVC.Player
         private TankModel tankModel;
         private TankView tankView;
         private Rigidbody rigidBody;
-        
 
         public static event Action OnPlayerShoot;
 
@@ -38,7 +37,6 @@ namespace TankBattle.MVC.Player
             Vector3 yRotation = new(0f, rotation * tankModel.RotationSpeed, 0f);
             Quaternion deltaRotation = Quaternion.Euler(yRotation * Time.deltaTime);
             rigidBody.MoveRotation(rigidBody.rotation * deltaRotation);
-            
         }
 
         internal void ShootingBullet(Vector3 position)

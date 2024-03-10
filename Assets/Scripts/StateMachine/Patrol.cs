@@ -4,11 +4,6 @@ namespace TankBattle.StateMachine
 {
     public class Patrol : State
     {
-        public override void OnEnter(TankController controller)
-        {
-            base.OnEnter(controller);
-            Debug.Log("Enemy " + controller.tankModel.TankName + " tank is in Patrol state");
-        }
         public override void OnUpdate(TankController controller)
         {
             base.OnUpdate(controller);

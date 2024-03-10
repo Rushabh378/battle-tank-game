@@ -13,7 +13,6 @@ namespace TankBattle.StateMachine
         {
             base.OnEnter(controller);
             coroutine = controller.tankView.ShootingBullet();
-            Debug.Log("Enemy " + controller.tankModel.TankName + " tank is in Chase state");
         }
 
         public override void OnTrigger(TankController controller, Collider other)

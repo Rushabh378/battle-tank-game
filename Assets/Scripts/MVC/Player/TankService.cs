@@ -15,7 +15,6 @@ namespace TankBattle.MVC.Player
         {
             tankModel = new TankModel(tankType);
             tankController = new TankController(tankModel, tankView, transform.position);
-        
         }
     }
 }
