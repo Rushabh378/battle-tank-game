@@ -7,7 +7,7 @@ namespace TankBattle.ScriptableObjects
     {
         public PoolTag tag;
         public int health = 100;
-        public Damager bulletPrefab;
+        public Bullet bulletPrefab;
         public Color color;
         [Range(10f, 50f)] public float firePower = 20f; 
         public float movementSpeed = 17;

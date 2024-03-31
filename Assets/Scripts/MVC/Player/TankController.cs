@@ -54,7 +54,7 @@ namespace TankBattle.MVC.Player
             tankModel.Health -= damage;
             if (tankModel.Health <= 0)
             {
-                OnPlayerDeath.Invoke();
+                OnPlayerDeath?.Invoke();
                 IEnumerator destroyEverything = tankView.StartDestroyingEverything();
                 tankView.StartCoroutine(destroyEverything);
             }
