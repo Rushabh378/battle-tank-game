@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TankBattle.Singleton;
 
@@ -13,6 +12,7 @@ namespace TankBattle.MVC.Player
         private Rigidbody rigidBody;
 
         public static event Action OnPlayerShoot;
+        public static event Action OnPlayerDeath;
 
         public TankController(TankModel tankModel,TankView tankView, Vector3 position)
         {
@@ -54,6 +54,7 @@ namespace TankBattle.MVC.Player
             tankModel.Health -= damage;
             if (tankModel.Health <= 0)
             {
+                OnPlayerDeath.Invoke();
                 IEnumerator destroyEverything = tankView.StartDestroyingEverything();
                 tankView.StartCoroutine(destroyEverything);
             }
