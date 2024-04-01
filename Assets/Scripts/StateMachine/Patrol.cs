@@ -7,7 +7,7 @@ namespace TankBattle.StateMachine
         public override void OnUpdate(TankController controller)
         {
             base.OnUpdate(controller);
-            controller.agent.stoppingDistance = 5f;
+            controller.agent.stoppingDistance = 6f;
             if (controller.agent.remainingDistance <= controller.agent.stoppingDistance)
             {
                 Vector3 point = RandomPoint(controller.center, controller.tankModel.PatrolingRange);

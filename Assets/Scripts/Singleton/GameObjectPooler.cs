@@ -46,9 +46,9 @@ namespace TankBattle.Singleton
 
             GameObject objectToGet = poolDictionary[tag].Dequeue();
 
-            objectToGet.SetActive(true);
             objectToGet.transform.position = position;
             objectToGet.transform.rotation = rotation;
+            objectToGet.SetActive(true);
 
             IPooledObject pooled = objectToGet.GetComponent<IPooledObject>();
             if(pooled != null)

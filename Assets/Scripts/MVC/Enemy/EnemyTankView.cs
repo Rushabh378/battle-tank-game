@@ -7,12 +7,12 @@ using TankBattle.Singleton;
 namespace TankBattle.MVC.Enemy
 {
     [RequireComponent(typeof(NavMeshAgent))]
-    public class EnemyTankView : MonoBehaviour, IDamagable
+    public class EnemyTankView : MonoBehaviour, IDamagable, IPooledObject
     {
-        [HideInInspector] internal NavMeshAgent agent;
-        public Transform firePosition;
-        public float attackDistance = 5f;
+        [SerializeField] private Transform firePosition;
+        [Range(1f, 10f)] public float attackDistance = 5f;
 
+        private NavMeshAgent agent;
         private TankController tankController;
 
         public void SetTankController(TankController tankController)
@@ -71,6 +71,11 @@ namespace TankBattle.MVC.Enemy
             {
                 tankController.ChangeState(tankController.Chase);
             }
+        }
+
+        public void OnObjectPooled()
+        {
+            //throw new System.NotImplementedException();
         }
     }
 }
